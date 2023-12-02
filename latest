@@ -1,0 +1,24 @@
+import numpy as np 
+import pandas as pd 
+import seaborn as sns 
+import matplotlib.pyplot as plt 
+import warnings 
+warnings.filterwarnings('ignore')
+df = pd.read_csv('loan.csv')
+
+# Calculate the percentage of null values in each column
+null_percentage = 100 * df.isnull().mean()
+
+# Filter columns with more than 70% null values
+columns_with_high_null_percentage = null_percentage[null_percentage > 70].index
+
+# Display the result
+print("Columns with more than 70% null values:")
+print(columns_with_high_null_percentage)
+
+print(df.shape)
+
+# Drop columns with more than the threshold percentage of null values
+df = df.drop(columns=columns_with_high_null_percentage)
+
+print(df.shape)
